@@ -16,34 +16,9 @@
     This document contains my solutions to the problem sets in the CLRS {\it Introduction to Algorithsm, 4th edition} \cite{CLRS2022}.
 \end{abstract}
 
-\section{The Role of Algorithms in Computing}
 
+\input{chapters/1-the-role-of-algorithms-in-computing/chapter-1.tex}
 
-
-\subsection{Algorithms}
-
-
-\subsubsection{}
-    A real-world system that requires sorting would be assigning the highest-priority tasks in an agile sprint planning session.  If the tasks are known ahead of time and the team is solidified, then the tasks need to be sorted by priority and doled out from highest to lowest priority.
-
-    A real-world example that requires finding the shortest distance between two points would be a map app that is suggesting the nearest gas station.  The map app would need to generate a list of suitably-nearby gas stations (i.e., within some cutoff radial distance) then sort by distance between the user and the gas station before suggesting the shortest distance (or drive time, etc.) gas station.
-
-\subsubsection{}
-    A metric of efficiency---other than speed---that needs to be considered in a real-world setting is {\it cost}.
-
-\subsubsection{}
-    A data structure that comes to mind is an array; in particular, a C-style array which has a compile-time constant size and element type.  This type of array can be optimized in many ways since its size and usage is known at compile time.  Notably, it's an extremely cache-friendly data structure since it's usually guaranteed to be stored contiguously in memory.  As a compile-time data structure, reasonably-sized arrays will likely be stored on the stack, saving a heap allocation.  These compile-time optimizations come at the cost of flexibility; the array's size and type are fixed at compile time.  Dynamic-sized arrays are possible, but of course come with different tradeoffs.
-
-\subsubsection{}
-    Both the shortest-path and traveling-salesman problems consider minimizing the distance traveled on a network of points, connected by paths of varying sizes.  The shortest-path problem asks for the shortest-path that connects {\it two} points.  The traveling-salesmen, however, asks for the shortest-path (or a path below some maximal distance) that includes {\it several} points.  For example, the path that minimizes the distance of a particular traveling-salesman problem may not necessarily be the shortest-distance path between the first and final point on the salesman's journey.
-
-\subsubsection{}
-    An example where the best-solution is required would be a search result that offers a ``sort-by'' feature; i.e., sort by cost, rating, etc.  This feature needs to sort the items according to the precise values selected by the user.  If they are only approximately sorted, then the utility of this feature is greatly diminished (users might miss out on a cheaper option, despite trying to find the cheapest one).
-
-    An example where an approximate-solution suffices would be the traveling-salesman problem provided in the text.  Suppose we need to budget for gas expenses on deliveries for the next week.  If we have the delivery schedules, then we can provide an upper-bound to the travel costs using an approximate solution to shortest-distance delivery routes.  All the better if a shorter-distance route is found after the budget estimate, but we nevertheless have utility in the estimate.
-
-\subsubsection{}
-    An example of a problem where the data is sometimes known ahead-of-time and sometimes only on-the-fly is assigning work schedules to employees in a appliance repair company.  If orders are backed up, then the schedule for the week can be calculated ahead of time.  If business is slow, then who to assign where and who to keep available could be a more complicated task.  But in both cases, the problem of assigning employees to work orders needs to be solved.
 
 \bibliographystyle{unsrt}
 
