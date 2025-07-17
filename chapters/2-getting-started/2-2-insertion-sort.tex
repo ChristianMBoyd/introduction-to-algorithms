@@ -8,3 +8,36 @@
         \\
         &\to& [26, 31, 41, 41, 59] \to [26, 31, 41, 41, 58, 59]
     \end{eqnarray}
+
+\subsubsection{}
+    Initially, $sum=0$ in the Sum-Array algorithm over the elements $A[1:n]$, $n\ge1$.  After one loop, $sum = A[1]$, which {\it is} the sum over the subarray $A[1:1$].  If we suppose that $j$th loop begins with $sum=sum_{j-1}$, where $sum_{j-1}$ is the sum over the subarray $A[1:j-1]$, then $sum$ will equal the sum over the subarray $A[1:j]$ at the end.  Finally, $sum$ will equal the sum over all $n$ elements in $A[1:n]$ when the loop terminates, since it ends after the $n$th term is included.
+    
+\subsubsection{}
+    A cheeky solution is to utilize Insertion-Sort followed by swapping (or copying) the elements into reverse order.  An analogous solution is to swap line 5 of the Insertion-Sort algorithm to instead read as below.
+    \begin{equation}
+        \text{\bf{while} } j > 0 \text{ and } A[j] < key
+    \end{equation}
+    The comparison has been changed to $A[j] < key$, instead of $A[j] > key$, so that $key$ is moved leftward until it comes across a (strictly) greater element or the front of the array.  
+
+\subsubsection{}
+    Below is the algorithm for a linear search of the array $A[1:n]$ for the value $x$.
+    \begin{eqnarray}
+        &\,& index = nil
+        \\ \nonumber &\,& \text{\bf for } j = 1 \text{ \bf to } n
+        \\ \nonumber &\,& \quad \text{\bf if } A[j] == x
+        \\ \nonumber &\,& \qquad index = j
+        \\ \nonumber &\,& \text{\bf return } index
+    \end{eqnarray}
+    Initially, the empty array definitely does not contain $x$ and so $index=nil$ is correct.  If $index$ is correctly set at the beginning of a loop, then it is either set to a value such that $A[index] = x$ or $index = nil$.  All that can happen during the loop is that $index$ is set to a new value such that $A[index] = x$ is true, otherwise $index$ is unchanged (and hence remains correct).  After the last loop iteration, $A[index] = x$ or $index = nil$, in which case no values in the array were equal to $x$.
+
+\subsubsection{}
+    The following procedure, Add-Binary-Integers, takes two $n$-bit arrays $A[1:n]$ and $B[1:n]$, where $A[i],B[i] = 0,1$ for any $1\le i\le n$, and returns their sum as the $(n+1)$-bit array $C[1:n+1]$.  The return is a $(n+1)$-bit array due to the case where $A[n]=B[n]=1$, and so we must have $C[n+1]=1$.  We start the algorithm with $C[1:n+1]$ initialized to all 0s.
+    \begin{eqnarray}
+        &\,& \text{\bf for } i = 0 \text{ \bf to } n
+        \\ \nonumber &\,& \quad C[i] = A[i] + B[i] + C[i]
+        \\ \nonumber &\,& \qquad \text{\bf if } C[i] \ge 2
+        \\ \nonumber &\,& \qquad \quad C[i] = C[i] - 2
+        \\ \nonumber &\,& \qquad \quad C[i+1] = 1
+        \\ \nonumber &\,& \text{\bf return } C
+    \end{eqnarray}
+    For empty arrays $A$ and $B$, $C$ is appropriately a $(0+1)$-bit array with $C[1] = 0$.  Consider the $i$th iteration, where $C[1:i]$ accurately represents the sum of $A[1:i-1]$ and $B[1:i-1]$.  If $A[i] == B[i] == 0$, then both $C[i]$ and $C[i+1]$ are correctly set, as the maximal value $C[i] == 1$ would not trigger the {\bf if} statement.  If exactly one of either $A[i]$ or $B[i]$ is 1, then the {\bf if} statement takes care of the case where $C[i] == 1$ initially by carrying the 1 up to $C[i + 1] == 1$ at the end of the loop.  If both $A[i] == B[i] == 1$, then the {\bf if} statement correctly sets $C[i + 1] == 1$ and $C[i]$ is ultimately unchanged from its value at the start of the loop.  In all cases, $C[1:i+1]$ contains the sum of the $i$-bit arrays $A[1:i]$ and $B[1:i]$.  Finally, the loop terminates after the $n$th iteration, when $C[1:n + 1]$ contains the sum of $A[1:n]$ and $B[1:n]$.
