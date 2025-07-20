@@ -1,0 +1,31 @@
+\subsection{Analyzing algorithms}
+
+\subsubsection{}
+    I prefer $\mathcal O$ notation to $\Theta$ notation.  In terms of that, the leading term is $\mathcal O\left( n^3 \right)$.
+
+\subsubsection{}
+    The Selection-sort algorithm is outlined below, and sorts the array $A[1:n]$ in place.
+    \begin{eqnarray}
+        &\,& \text{\bf for } i = 1\, \text{\bf to } n-1
+        \\ \nonumber &\,& \quad min\_index = i
+        \\ \nonumber &\,& \qquad {\bf for } j = i + 1 \,\text{\bf to } n
+        \\ \nonumber &\,& \qquad \quad \text{\bf if } A[j] < A[min\_index]
+        \\ \nonumber &\,& \qquad \qquad min\_index = j
+        \\ \nonumber &\,& \quad min = A[min\_index]
+        \\ \nonumber &\,& \quad A[min\_index] = A[i]
+        \\ \nonumber &\,& \quad A[i] = min
+    \end{eqnarray}
+    The loop invariant for the $i$th iteration is the subarray $A[1:i-1]$, which is already sorted and contains the $i-1$ smallest values in $A[1:i]$.  The 1st iteration has null content (an empty array is sufficiently sorted).  At the start of the $i$th iteration, $A[1:i-1]$ is already sorted and contains values all lesser or equal to those in $A[i:n-1]$.  The loop finds the next smallest element and puts it into $A[i]$, so that $A[1:i]$ is now sorted.  At the end of the loop, no additional swapping is necessary since the $(n-1)$th iteration sorts the last two elements by putting the smallest value in $A[n-1]$.  As such, $A[1:n]$ is fully sorted.
+
+    No matter the input to this algorithm, every $i$th iteration will inspect the remaining $(n-i)$ values since the previous steps jumble the values around.  As a result, the Selection-sort algorithm requires $(n-i-1)$ additional actions the $i$th iteration.  That brings the leading scaling to $\mathcal O(n^2)$ due to the sum below.
+    \begin{equation}
+        \sum_{i=1}^{n-1} (n - i - 1) = (n-1)^2 - \frac{(n-1)(n-2)}{2} = \frac{(n-1)(n+2)}{2}
+    \end{equation}
+
+\subsubsection{}
+    If we have no prior knowledge of the array to search for a particular value, then that value is equally likely to be anywhere in the array.  As long as the ``average'' case implies that the element typically exists in the array, then linear search on the array $A[1:n]$ will take $n/2$ steps on average.  This provides the scaling $\mathcal O(n)$.
+
+    The worst case for linear search is that the searched value either does not exist or is in the last position.  In this case, searching $A[1:n]$ would take $n$ steps.  This is also $\mathcal O(n)$.
+
+\subsubsection{}
+    The ``best-case'' in $A[1:n]$ for a sorting algorithm is when $A[1:n]$ is already sorted.  No sorting algorithm can perform better than $\mathcal O(n)$ time complexity since every element must be compared at least once to verify it's in order.  As a result, checking if the input $A[1:n]$ is already sorted won't negatively impact the big-O notation of a sorting algorithm.  Of course, it might bring down the average real-world performance of sorting algorithms that are already $\mathcal O(n)$.
