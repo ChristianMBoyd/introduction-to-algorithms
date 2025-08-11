@@ -1,4 +1,14 @@
 \subsection{Designing algorithms}
 
 \subsubsection{}
-    
+    The initial sequence $[3, 41, 52, 26, 38, 57, 9, 49]$ will be merge-sorted according to the following steps.
+    \begin{eqnarray}
+        \nonumber &\,& [3, 41, 52, 26, 38, 57, 9, 49] \to 
+            [3, 41, 52, 26] [38, 57, 9, 49]
+        \\ \nonumber &\,& \to
+        [3, 41] [52, 26] [38, 57] [9, 49] \to
+        [3, 41] [26, 52] [38, 57] [9, 49]
+        \\ \nonumber &\,& \to
+        [3, 26, 41, 52] [9, 38, 49, 57] \to
+        [3, 9, 26, 38, 41, 49, 52, 57]
+    \end{eqnarray}
