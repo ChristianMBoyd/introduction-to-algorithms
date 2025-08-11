@@ -14,6 +14,10 @@
     \end{eqnarray}
 
 \subsubsection{}
-    Suppose that we are guaranteed that MergeSort is invoked only as MergeSort$(A, 1, n)$ in client code for $n\ge1$.  Let's now change line 1 to test for {\bf if }$p \neq r$.  In the case where $n=1$, we hit this test and return the sorted, single-item list without issue.
+    Suppose that MergeSort is invoked only as MergeSort$(A, 1, n)$ in client code for $n\ge1$.  Let's now change line 1 to test for {\bf if }$p \neq r$.  In the case where $n=1$, we hit this test and correctly return the sorted, single-item list.  If $n>1$, then $q:=\left\lfloor (1 + n)/2\right\rfloor$ and the recursive call on line 4, MergeSort$(A, p, q)$ with $p=1$, is of the form already considered in the problem statement.  The only concern is the second recursive call on line 5, MergeSort $(A, q + 1, r)$ (with $r=n$ currently).  
 
-    Finish\ldots
+    The question now becomes: if $p\le r$, can it be that $q + 1 > r$?  If $p=r$, then we will abort at the test in line 1.  If $p<r$, 
+    \begin{equation}
+        q:=\left\lfloor \frac{p + r}{2} \right\rfloor \le  \left\lfloor \frac{2 r - 1}{2} \right\rfloor = r - 1\,\,\,.
+    \end{equation}
+    As a result $q+1\le r$ and the recursive call on line 5 will never result in a call to MergeSort where $p>r$.  We can safely switch the test on line 1 to $p\neq r$ without concern so long as client code abides by the problem statement.
